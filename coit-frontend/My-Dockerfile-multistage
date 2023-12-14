@@ -1,0 +1,12 @@
+#create the build folder
+FROM node:20-alpine AS build
+WORKDIR /usr/app
+#download dependencies from package.json
+COPY package.json /usr/app/
+RUN npm install
+#copy the code to create build folder
+COPY . /usr/app/
+RUN npm run build
+#copy the build folder into nginx share
+FROM NGINX:alpine3.18
+COPY --from=build /usr/app/build /usr/share/nginx/html
