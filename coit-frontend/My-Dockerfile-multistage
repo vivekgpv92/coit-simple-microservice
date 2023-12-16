@@ -8,5 +8,5 @@ RUN npm install
 COPY . /usr/app/
 RUN npm run build
 #copy the build folder into nginx share
-FROM NGINX:alpine3.18
+FROM nginx:alpine3.18
 COPY --from=build /usr/app/build /usr/share/nginx/html
