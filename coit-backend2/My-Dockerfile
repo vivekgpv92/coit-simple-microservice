@@ -1,6 +1,7 @@
 FROM python:3.9.18-slim
 EXPOSE 5000
+WORKDIR /app
 COPY sa /app
-WORKDIR /app/sa
 RUN pip3 install -r requirements.txt && \
-    python3 sentiment_analysis.py
+    python3 -m textblob.download_corpora
+CMD [ "python3","sentiment_analysis.py" ]
