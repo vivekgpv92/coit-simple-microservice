@@ -1,0 +1,6 @@
+FROM python:3.9.18-slim
+EXPOSE 5000
+WORKDIR /app
+COPY sa /app
+RUN pip3 install -r sa/requirements.txt && \
+    python3 sa/sentiment_analysis.py
