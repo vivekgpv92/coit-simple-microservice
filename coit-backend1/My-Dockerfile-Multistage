@@ -1,11 +1,10 @@
 FROM maven:3.9.6-amazoncorretto-8 AS build
 WORKDIR /usr/app
 COPY . /usr/app
-RUN mvn clean install
+RUN mvn install
 
 FROM gcr.io/distroless/java17-debian11
-EXPOSE 8080
 ENV SA_LOGIC_API_URL http://localhost:5000
-WORKDIR /usr/app/
-COPY --from=build /usr/app/target/sentiment-analysis-web-0.0.2-SNAPSHOT.jar /usr/app
+EXPOSE 8080
 CMD ["java","-jar","sentiment-analysis-web-0.0.2-SNAPSHOT.jar","--sa.logic.api.url=${SA_LOGIC_API_URL}"]
+COPY --from=build /usr/app/target/sentiment-analysis-web-0.0.2-SNAPSHOT.jar /
