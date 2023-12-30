@@ -2,5 +2,5 @@ FROM openjdk:23-slim-bullseye
 ENV SA_LOGIC_API_URL http://localhost:5000
 EXPOSE 8080
 WORKDIR /usr/app
+CMD ["java", "-jar", "/usr/app/sentiment-analysis-web-0.0.2-SNAPSHOT.jar", "--sa.logic.api.url=${SA_LOGIC_API_URL}"]
 COPY target/sentiment-analysis-web-0.0.2-SNAPSHOT.jar /usr/app/
-CMD [ "java","-jar","/usr/app/target/sentiment-analysis-web-0.0.2-SNAPSHOT.jar","--sa_logic_api_url=${SA_LOGIC_API_URL}" ]
